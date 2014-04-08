@@ -12,6 +12,7 @@ This repository contains the source code for the client-side Insight implementat
 
 1. In the onStart() method, add the following 3 lines of code at beginning of the function (after super.onStart()) with changes specified. This code instantiates a new Insight session when the application is started. For example,
 
+
 	protected void onStart() {
 		super.onStart();
 		
@@ -34,24 +35,26 @@ This repository contains the source code for the client-side Insight implementat
 
 3. The following methods can be used to log application specific events using Insight. The Insight client relays this information to the server to be logged for future analytics.
 
-  a. // Logs an event denoted by the eventID. It increments the counter for the input event (starting at 0).
-		 InsightLib.captureEvent(Integer eventID);
-	
-	b. // Logs an event corresponding to the eventID and the value corresponding to the event instance.
-     InsightLib.captureEventValue(Integer eventID, Double value);
-	
-  c. // Logs an event corresponding to the eventID and the value string corresponding to the event instance.
-  	 InsightLib.captureEventString(Integer eventID, String value);
-  	 
-  d. // The following pair of calls should be wrapped around a download event (e.g., downloading an image file,   transmitting data to a server etc.). These call record the duration and the bytes transferred during the download event.
-  
-      // Call the method before the start of the download.
-			long downloadId = InsightLib.downloadStarted();
-
-      /*
-       * Perform the download activity.
-       */
-			
-			// Call the method after the end of the download.
-			InsightLib.downloadEnded(downloadId);
+	a. Logs an event denoted by the eventID. It increments the counter for the input event (starting at 0).
 		
+		InsightLib.captureEvent(Integer eventID);
+	
+	b. Logs an event corresponding to the eventID and the value corresponding to the event instance.
+     
+		InsightLib.captureEventValue(Integer eventID, Double value);
+	
+ 	c. Logs an event corresponding to the eventID and the value string corresponding to the event instance.
+		
+		InsightLib.captureEventString(Integer eventID, String value);
+  	 
+  	d. The following pair of calls should be wrapped around a download event (e.g., downloading an image file,   transmitting data to a server etc.). These call record the duration and the bytes transferred during the download event.
+  
+		// Call the method before the start of the download.
+		long downloadId = InsightLib.downloadStarted();
+
+		/*
+		 * Perform the download activity.
+		*/
+			
+		// Call the method after the end of the download.
+		InsightLib.downloadEnded(downloadId);
