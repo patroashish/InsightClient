@@ -3,7 +3,7 @@
 	package="com.wisc.tester" android:versionName="1.0" android:versionCode="1">
 	<application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@style/CustomMainTheme">
 	<!-- The following is a DEMO provider that you should place in your own app. -->
-		<activity android:name=".DummyApp"
+		<activity android:name=".InsightLibTester"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

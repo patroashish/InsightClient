@@ -31,9 +31,18 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class DummyApp extends Activity {
+/**
+ * This is a trivial activity class that explains the usage of Insight API calls. 
+ * To use Insight with your android application, you should include the Insight API calls 
+ * in the same manner as shown in this activity.
+ * 
+ * More details are available at: https://github.com/patroashish/InsightClient
+ * 
+ * @author Ashish Patro
+ */
+public class InsightLibTester extends Activity {
 	
-	private static final String TAG = "DummyApp";
+	private static final String TAG = "InsightLibTester";
 	/**
 	 *  Maintain State about the variable. 
 	 */
