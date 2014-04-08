@@ -11,7 +11,7 @@ This repository contains the source code for the client-side Insight implementat
 
 a. The main Insight server to collect the aforementioned statistics from the clients: https://github.com/patroashish/InsightMainServer
 
-b. The ping measurement server that performs lightweight network latency measurements over both UDP and TCP to measure network performance (over cellular/WiFi networks) between the server the client applications: https://github.com/patroashish/InsightPingServer
+b. The ping measurement server performs lightweight network latency measurements over UDP and TCP to measure network latency between the server and the application (over cellular/WiFi): https://github.com/patroashish/InsightPingServer
 
 Add the following line of code to the Android applications to use Insight.
 
