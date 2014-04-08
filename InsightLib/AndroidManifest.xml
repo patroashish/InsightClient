@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.wisc.tester" android:versionName="1.0" android:versionCode="1">
+	<application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@style/CustomMainTheme">
+	<!-- The following is a DEMO provider that you should place in your own app. -->
+		<activity android:name=".DummyApp"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+	</application>
+	<uses-sdk android:minSdkVersion="4" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+</manifest>
+	<!--
+		android:configChanges="orientation|keyboard|screenLayout|fontScale|mcc|mnc|locale|touchscreen|keyboardHidden|navigation"
+	-->
+	<!--android:launchMode="singleTop"-->
+	<!--android:alwaysRetainTaskState="true"-->
