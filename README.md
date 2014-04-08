@@ -9,8 +9,9 @@ A version of this toolkit was used for the measurements in our CoNEXT 2013 paper
 
 This repository contains the source code for the client-side Insight implementation. To use Insight to collect statistics from their deployed applications, developers only need to add a few lines of code to their applications. Before using the Insight client, developers need to setup the Insight servers to collect and store data from the Insight clients. The server code is available at the following locations:-
 
-a. The main Insight server to collect the aforementioned statistics from the clients: 
-b. The ping measurement server that performs lightweight network latency measurements over both UDP and TCP to measure network performance (over cellular/WiFi networks) between the server the client applications.
+a. The main Insight server to collect the aforementioned statistics from the clients: https://github.com/patroashish/InsightMainServer
+
+b. The ping measurement server that performs lightweight network latency measurements over both UDP and TCP to measure network performance (over cellular/WiFi networks) between the server the client applications: https://github.com/patroashish/InsightPingServer
 
 Add the following line of code to the Android applications to use Insight.
 
