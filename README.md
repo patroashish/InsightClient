@@ -1,21 +1,21 @@
 InsightClient
 =============
 
-Insight is toolkit that allows mobile application developers to collect application analytics and understand the various aspects about the usage of their applications. Insight allows Android application developers to collect a diverse set of statistics from their application: Device type information, client sessions, client location, CPU + memory consumption statistics, battery drain statistics, application specific events.
+Insight is a measurement toolkit that allows mobile application developers to collect application analytics and understand  various aspects about the usage of their applications. Insight allows application developers to collect a diverse set of statistics from their application: device type information, client sessions, client location, CPU + memory consumption statistics, battery drain statistics, application specific events.
 
 Furthermore, Insight performs light-weight network latency measurements during the application sessions. This is useful for correlating the network performance with the aforementioned data. For example, by tracking in-app purchases made by users and the network quality statistics of sessions in which these purchases were made, developers can infer how user revenue may be impacted by quality across different networks. 
 
 A version of this toolkit was used for the measurements in our CoNEXT 2013 paper: Capturing mobile experience in the wild: a tale of two apps: http://dl.acm.org/citation.cfm?id=2535391
 
-This repository contains the source code for the client-side Insight implementation. To use Insight to collect statistics from their deployed applications, developers only need to add a few lines of code to their applications. Before using the Insight client, developers need to setup the Insight servers to collect and store data from the Insight clients. The server code is available at the following locations:-
+This repository contains the source code for the client-side Insight implementation. To use Insight to collect statistics from their deployed applications, developers only need to add a few lines of code to their applications. Before using the Insight client, developers need to setup the Insight servers to collect and store data from the Insight clients. The server code and instructions are available at the following locations:-
 
 a. The main Insight server to collect the aforementioned statistics from the clients: https://github.com/patroashish/InsightMainServer
 
 b. The ping measurement server performs lightweight network latency measurements over UDP and TCP to measure network latency between the server and the application (over cellular/WiFi): https://github.com/patroashish/InsightPingServer
 
-Add the following line of code to the Android applications to use Insight.
+To use Insight with your application, include the Insight client code as a library (jar file) or copy the source code directly into the application. To package Insight client code as a jar file, export the "com/wisc/insightlib/" directory in the src/ folder. Then, add the following line of code to your android application:
 
-1. In the onStart() method, add the following 3 lines of code at beginning of the function (after super.onStart()) with changes specified. This code instantiates a new Insight session when the application is started. For example,
+1. In the onStart() method, add the following 3 lines of code at beginning of the function (after super.onStart()) with specified changes. This code instantiates a new Insight session when the application is started.
 
 		super.onStart();
 		
@@ -33,7 +33,7 @@ Add the following line of code to the Android applications to use Insight.
 		
 		// Other application code.
 
-3. The following methods can be used to log application specific events using Insight. The Insight client relays this information to the server to be logged for future analytics.
+3. The following methods can be used to log application specific events using Insight. The Insight client code relays this information to the server to be logged for future analytics.
 
 	a. Logs an event denoted by the eventID. It increments the counter for the input event (starting at 0).
 		
@@ -58,3 +58,4 @@ Add the following line of code to the Android applications to use Insight.
 			
 		// Call the method after the end of the download.
 		InsightLib.downloadEnded(downloadId);
+
