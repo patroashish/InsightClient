@@ -15,7 +15,7 @@ The Insight server has two components:
 
 2. The ping measurement server performs lightweight network latency measurements over UDP and TCP to measure network latency between the server and the application (over cellular/WiFi).
 
-To use Insight with your application, include the Insight client code as a library (jar file) or copy the source code directly into the application. To package Insight client code as a jar file, export the "com/wisc/insightlib/" directory in the src/ folder. Then, add the following line of code to your android application:
+To use Insight with your application, include the Insight client code as a library (jar file) or copy the source code directly into the application. To package Insight client code as a jar file, export the "com/wisc/insightlib/" directory in the src/ folder. Then, add the following lines of code to your android application:
 
 1. In the onStart() method, add the following 3 lines of code at beginning of the function (after super.onStart()) with specified changes. This code instantiates a new Insight session when the application is started.
 
