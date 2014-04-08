@@ -36,6 +36,9 @@ import android.widget.TextView;
  * To use Insight with your android application, you should include the Insight API calls 
  * in the same manner as shown in this activity.
  * 
+ * The following example is for a study application which has various studying related activities: creating
+ * flash cards, reading a subject such as Geography, taking a quiz etc.
+ * 
  * More details are available at: https://github.com/patroashish/InsightClient
  * 
  * @author Ashish Patro
