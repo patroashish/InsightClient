@@ -7,13 +7,7 @@ Furthermore, Insight performs light-weight network latency measurements during t
 
 A version of this toolkit was used for the measurements in our CoNEXT 2013 paper: Capturing mobile experience in the wild: a tale of two apps: http://dl.acm.org/citation.cfm?id=2535391
 
-This repository contains the source code for the client-side Insight implementation. To use Insight to collect statistics from their deployed applications, developers only need to add a few lines of code to their applications. Before using the Insight client, developers need to setup the Insight servers to collect and store data from the Insight clients. The server code and setup instructions are available at the following location: https://github.com/patroashish/InsightServers
-
-The Insight server has two components:
-
-1. The main Insight server to collect the aforementioned statistics from the clients.
-
-2. The ping measurement server performs lightweight network latency measurements over UDP and TCP to measure network latency between the server and the application (over cellular/WiFi).
+This repository contains the source code for the client-side Insight implementation. Before using the Insight client, developers need to setup the Insight servers to collect and store data from the Insight clients. The server code and setup instructions are available at the following location: https://github.com/patroashish/InsightServers
 
 To use Insight with your application, include the Insight client code as a library (jar file) or copy the source code directly into the application. To package Insight client code as a jar file, export the "com/wisc/insightlib/" directory in the src/ folder. Then, add the following lines of code to your android application:
 
@@ -61,3 +55,4 @@ To use Insight with your application, include the Insight client code as a libra
 		// Call the method after the end of the download.
 		InsightLib.downloadEnded(downloadId);
 
+Along with the Insight client code, this repository contains a trivial application code (DummyApp.java) to explain how to use insight within your application.
