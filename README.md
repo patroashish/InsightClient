@@ -12,21 +12,21 @@ This repository contains the source code for the client-side Insight implementat
 
 1. In the onStart() method, add the following 3 lines of code at beginning of the function (after super.onStart()) with changes specified. This code instantiates a new Insight session when the application is started. For example,
 
-	super.onStart();
+		super.onStart();
 		
-	InsightLib.setServerHostname("example.com"); // Update the server hostname with your server's hostname.
-	InsightLib.setApplicationCharID("testUser"); // Update with user ID the application specific user ID information.
-	InsightLib.startSession(this.getApplicationContext());
+		InsightLib.setServerHostname("example.com"); // Update the server hostname with your server's hostname.
+		InsightLib.setApplicationCharID("testUser"); // Update with user ID the application specific user ID information.
+		InsightLib.startSession(this.getApplicationContext());
 		
-	// Other application code.
+		// Other application code.
 		
 2. In the onStop() method, add the 'InsightLib.endSession()' call at beginning of the function (after super.onStop()). This code ends the existing Insight session when the application is stopped.
 
-	super.onStop();
+		super.onStop();
 		
-	InsightLib.endSession();
+		InsightLib.endSession();
 		
-	// Other application code.
+		// Other application code.
 
 3. The following methods can be used to log application specific events using Insight. The Insight client relays this information to the server to be logged for future analytics.
 
