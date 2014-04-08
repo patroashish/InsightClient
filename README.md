@@ -7,14 +7,18 @@ Furthermore, Insight performs light-weight network latency measurements during t
 
 A version of this toolkit was used for the measurements in our CoNEXT 2013 paper: Capturing mobile experience in the wild: a tale of two apps: http://dl.acm.org/citation.cfm?id=2535391
 
-This repository contains the source code for the client-side Insight implementation. To use Insight to collect statistics from their applications, developers need to perform the following steps:-
+This repository contains the source code for the client-side Insight implementation. To use Insight to collect statistics from their deployed applications, developers only need to add a few lines of code to their applications. Before using the Insight client, developers need to setup the Insight servers to collect and store data from the Insight clients. The server code is available at the following locations:-
 
+a. The main Insight server to collect the aforementioned statistics from the clients: 
+b. The ping measurement server that performs lightweight network latency measurements over both UDP and TCP to measure network performance (over cellular/WiFi networks) between the server the client applications.
+
+Add the following line of code to the Android applications to use Insight.
 
 1. In the onStart() method, add the following 3 lines of code at beginning of the function (after super.onStart()) with changes specified. This code instantiates a new Insight session when the application is started. For example,
 
 		super.onStart();
 		
-		InsightLib.setServerHostname("example.com"); // Update the server hostname with your server's hostname.
+		InsightLib.setServerHostname("example.com"); // Update the server hostname with your Insight server's hostname.
 		InsightLib.setApplicationCharID("testUser"); // Update with user ID the application specific user ID information.
 		InsightLib.startSession(this.getApplicationContext());
 		
