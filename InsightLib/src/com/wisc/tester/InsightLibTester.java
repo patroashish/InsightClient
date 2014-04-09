@@ -53,6 +53,7 @@ public class InsightLibTester extends Activity {
 	
 	TextView test = null;
 	Button testEvent = null;
+	Button testDownload = null;
 	
     /** Called when the activity is first created. */
     @Override
@@ -62,11 +63,30 @@ public class InsightLibTester extends Activity {
         
         test = (TextView) findViewById(R.id.testStatus);
         testEvent = (Button) findViewById(R.id.testEventCalls);
+        testDownload = (Button) findViewById(R.id.testDownloadCalls);
         
     	testEvent.setOnClickListener(new OnClickListener() {
 
     		public void onClick(View v) {
     			// Testing all the Insight API calls for logging application specific events.
+    			Log.i(TAG, "Logging test events using Insight..");
+    			
+    			// Example usage of an Insight call to record a flash card creation event. 
+    			captureFlashCardCreationEvent();
+    			
+    			// Example usage of an Insight call to record the user studying Geography within the application.
+    			recordStudyTypeEvent("Geography");
+    			
+    			// Example usage of an Insight call to record the score during a quiz.
+    			recordStudyScoreEvent(100.0); // Probably a very good geography student :P
+    		}
+    	});
+    	
+    	testDownload.setOnClickListener(new OnClickListener() {
+
+    		public void onClick(View v) {
+    			// Testing all the Insight API calls for logging download events
+    			Log.i(TAG, "Logging test download events using Insight..");
     			
     			// Example usage of an Insight call to record the download activity of an image file.
     			downloadApiExample();
@@ -78,21 +98,17 @@ public class InsightLibTester extends Activity {
 	protected void onStart() {
 		super.onStart();
 		
-		InsightLib.setServerHostname("example.com"); // Replace this with your Insight server address.
+		Log.w(TAG, "onStart called...");
+		
+		/**
+		 * Insight API calls.
+		 */
+		InsightLib.setServerHostname("insightserver.example"); // Replace this with your Insight server address.
 		InsightLib.setApplicationCharID("testUser"); // Optional: You can use this API to record you application specific username.
+		
+		// Marks the start of Insight session.
 		InsightLib.startSession(this.getApplicationContext());
 		
-		// Testing all the Insight API calls for logging application specific events.
-
-		// Example usage of an Insight call to record a flash card creation event. 
-		captureFlashCardCreationEvent();
-		
-		// Example usage of an Insight call to record the user studying Geography within the application.
-		recordStudyTypeEvent("Geography");
-		
-		// Example usage of an Insight call to record the score during a quiz.
-		recordStudyScoreEvent(100.0); // Probably a very good geography student :P
-        
 		/**
 		 * Intialize the application state.
 		 */
@@ -123,18 +139,26 @@ public class InsightLibTester extends Activity {
 	@Override
 	protected void onStop() {
 		super.onStop();
-		Log.e(TAG, "onStop called...");
+		Log.w(TAG, "onStop called...");
+		
+		/*
+		 * Insight API call.
+		 */
+		// Waits for Constants.SESSION_END_WAIT seconds in the background and then ends Insight session.
 		InsightLib.endSession();
 	}
 	
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
-		// TODO: Uncomment for Insight.
 		/*
-		 * Log.e(TAG, "onDestroy called...");
-		 * InsightLib.endSession();
+		 * Insight API call.
 		 */
+		// Immediately ends the session before the application gets destroyed.
+		// IMPORTANT: This call should be placed before super.onDestroy().
+		InsightLib.finish();
+		
+		super.onDestroy();
+		Log.w(TAG, "onDestroy called...");
 	}
 	
 	// Event example.

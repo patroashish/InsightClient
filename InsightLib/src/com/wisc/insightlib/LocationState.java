@@ -170,10 +170,6 @@ public class LocationState {
 
 			isDoingRevGeocoding = true;
 
-			//String getURL = "http://api.geonames.org/countrySubdivisionJSON?lat="
-			//	+ loc.getLatitude() + "&lng=" + loc.getLongitude() + "&username=demo";
-			
-			// "http://maps.google.com/maps/geo?ll=43.43,-89.4"
 			//String getURL = "http://maps.google.com/maps/geo?ll=" + loc.getLatitude() + "," + loc.getLongitude();
 			//String getURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + loc.getLatitude() + "," + loc.getLongitude() + 
 			//		"&sensor=true&key=AIzaSyDaHSD3DRzm9xzaFoIQIl865KTHZCbKQb4";

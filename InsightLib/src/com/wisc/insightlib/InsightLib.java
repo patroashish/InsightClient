@@ -124,7 +124,7 @@ public class InsightLib {
 			// Need to intialize this variable only once. Should never be null.
 			if (InsightLib.endSessionThread == null) {
 				InsightLib.endSessionThread = new InsightLib.EndSessionThreadRunner();
-				Log.w(TAG, "initializing thread...");
+				Log.w(TAG, "Initializing thread...");
 			}
 			
 			// Increment the count for each onStart/startSession call.
@@ -191,29 +191,32 @@ public class InsightLib {
 		// TODO: Finalize: Do we need to use counts or just the wait heuristic is enough.
 		// If wait heuristics is enough, its better because we don't want to mess up counts and keep
 		// running insight in the background.
-		if (InsightLib.countActiveOnStarts <= 0) {
+		if (InsightLib.countActiveOnStarts > 0) {
+
+			Log.w(TAG, "Not ending session as " + countActiveOnStarts + " onStarts left");
+		} else {
 			Log.w(TAG, "Starting endsessionThread... Active onStarts: " +
-						InsightLib.countActiveOnStarts);
-			
-			// TODO: Finalize.
-			/*
-			// End the session.
-			finish();
-			*/
+					InsightLib.countActiveOnStarts);
 		
 			InsightLib.countActiveOnStarts = 0;
 		
-			Log.w(TAG, "ending session...");
+			Log.w(TAG, "Waiting for " + Constants.SESSION_END_WAIT / 1000 + " seconds before ending session...");
 			endSessionThread.endSession();
-		} else {
-			Log.w(TAG, "Not ending session as " + countActiveOnStarts + " onStarts left");
 		}
 	}
 	
 	/** 
-	 * Contains the code that is execute while ending a session.
+	 * Contains the code that is executed while ending a session.
 	 */
-	private static void finish() {
+	public static void finish() {
+		Log.w(TAG, "Insight finish called...");
+		
+		// TODO: Finalize: Do we need to use counts or just the wait heuristic is enough.
+		if (InsightLib.countActiveOnStarts > 0) {
+			Log.w(TAG, "Not ending session as " + countActiveOnStarts + " onStarts left");
+			return;
+		}
+		
 		try {
 			networkTrafficStats.endSession();
 		} catch (Exception e) {
@@ -251,6 +254,11 @@ public class InsightLib {
 		} catch (Exception e) {
 			Log.e(TAG, " Exception while ending session: " + e.toString());
 		}
+		
+		Log.w(TAG, "Session ended");
+		
+		// Reset the state as session is complete.
+		endSessionThread.resetState();
 	}
 
 	/**
@@ -551,18 +559,16 @@ public class InsightLib {
 		
 		if (eventStats != null) {
 			overallStatsString.append(eventStats.getEventCountStatsString());
-		}
-		overallStatsString.append("$");
+			overallStatsString.append("$");
 		
-		if (eventStats != null) {
 			overallStatsString.append(eventStats.getEventValueStatsString());
-		}
-		overallStatsString.append("$");
+			overallStatsString.append("$");
 		
-		if (eventStats != null) {
 			overallStatsString.append(eventStats.getEventStringStatsString());
+			overallStatsString.append("$");
+		} else {
+			overallStatsString.append("$$$");
 		}
-		overallStatsString.append("$");
 		
 		if (networkTrafficStats != null) {
 			overallStatsString.append(networkTrafficStats.getDownloadStatsString());
@@ -645,21 +651,21 @@ public class InsightLib {
 		
 		public void run() {
 			sessionEndComplete = false;
+			
 			try {
 				Thread.sleep(Constants.SESSION_END_WAIT);
 			} catch (InterruptedException e) {
-				Log.e(TAG, "Exception while waiting to end session.. " + e.toString());
+				Log.e(TAG, "Interrupted while waiting: Not doing anything.. " + e.toString());
 				return;
 			}
 			
-			sessionEndComplete = true;
-			
-			// TODO: Code
-			InsightLib.finish();
-			Log.w(TAG, "Session ended");
-			
-			// Reset the state as session is complete.
-			resetState();
+			// If Insight.finish() is called from onDestroy(), then no need to call this again.
+			if (!sessionEndComplete) {
+				sessionEndComplete = true;
+				InsightLib.finish();
+			} else {
+				Log.w(TAG, "Session already ended. Not doing anything..");
+			}
 		}
 	}
 }

@@ -105,7 +105,7 @@ public class Constants {
 	/**
 	 * Session end hysterisis value.
 	 */
-	public static final int SESSION_END_WAIT = 20 * SEC;
+	public static final int SESSION_END_WAIT = 10 * SEC;
 	
 	/**
 	 * Packet Sizes
