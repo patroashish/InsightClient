@@ -9,41 +9,50 @@ A version of this toolkit was used for the measurements in our CoNEXT 2013 paper
 
 This repository contains the source code for the client-side Insight implementation. Before using the Insight client, developers need to setup the Insight servers to collect and store data from the Insight clients. The server code and setup instructions are available at the following location: https://github.com/patroashish/InsightServers
 
-To use Insight with your application, include the Insight client code as a library (jar file) or copy the source code directly into the application. To package Insight client code as a jar file, export the "com/wisc/insightlib/" directory in the src/ folder. Then, add the following lines of code to your android application:
+To use Insight with your application, include the Insight client code as a library (jar file) or copy the source code directly into the application. To package Insight client code as a jar file, export the "com/wisc/insightlib/" directory in the src/ folder. Then, add the following lines of code to the main activity in your Android application:
 
-1. In the onStart() method, add the following 3 lines of code at beginning of the function (after super.onStart()) with specified changes. This code instantiates a new Insight session when the application is started.
+1. In the onStart() method, add the following 3 lines of code at beginning of the function (after super.onStart()) with specified changes. This code instantiates a new Insight session when the main activity is started.
 
 		super.onStart();
 		
 		InsightLib.setServerHostname("example.com"); // Update the server hostname with your Insight server's hostname.
 		InsightLib.setApplicationCharID("testUser"); // Update with user ID the application specific user ID information.
-		InsightLib.startSession(this.getApplicationContext());
+		InsightLib.startSession(this.getApplicationContext()); // Start the Insight session.
 		
 		// Other application code.
 		
-2. In the onStop() method, add the 'InsightLib.endSession()' call at beginning of the function (after super.onStop()). This code ends the existing Insight session when the application is stopped.
+2. In the onStop() method, add the 'InsightLib.endSession()' call at beginning of the function (after super.onStop()). Insight waits for a few seconds and then ends the current session when the main activity is stopped.
 
 		super.onStop();
 		
-		InsightLib.endSession();
+		InsightLib.endSession();  // Insight API call.
 		
 		// Other application code.
 
-3. The following methods can be used to log application specific events using Insight. The Insight client code relays this information to the server to be logged for future analytics.
+3. In the onDestroy() method, add the 'InsightLib.finish()' call at beginning of the function (before super.onDestroy()). Insight immediately ends the current session before the main activity is destroyed.
+		
+		InsightLib.finish();
 
-	a. Logs an event denoted by the eventID. It increments the counter for the input event (starting at 0).
+		super.onDestroy(); // Insight API call.
+		
+		// Other application code.
+
+
+The following Insight API calls can be used to log application specific events inside any application related activity class. The Insight client code relays this information to the server to be logged for future analytics.
+
+1. Logs an event denoted by the eventID. It increments the counter for the input event (starting at 0).
 		
 		InsightLib.captureEvent(Integer eventID);
 	
-	b. Logs an event corresponding to the eventID and the value corresponding to the event instance.
+2. Logs an event corresponding to the eventID and the value corresponding to the event instance.
      
 		InsightLib.captureEventValue(Integer eventID, Double value);
 	
- 	c. Logs an event corresponding to the eventID and the value string corresponding to the event instance.
+3. Logs an event corresponding to the eventID and the value string corresponding to the event instance.
 		
 		InsightLib.captureEventString(Integer eventID, String value);
   	 
-  	d. The following pair of calls should be wrapped around a download event (e.g., downloading an image file,   transmitting data to a server etc.). These call record the duration and the bytes transferred during the download event.
+4.. The following pair of calls should be wrapped around a download event (e.g., downloading an image file,   transmitting data to a server etc.). These call record the duration and the bytes transferred during the download event.
   
 		// Call the method before the start of the download.
 		long downloadId = InsightLib.downloadStarted();
@@ -55,4 +64,4 @@ To use Insight with your application, include the Insight client code as a libra
 		// Call the method after the end of the download.
 		InsightLib.downloadEnded(downloadId);
 
-Along with the Insight client code, this repository contains a trivial application code (DummyApp.java) to explain how to use insight within your application.
+Along with the Insight client code, this repository contains a trivial main activity class (InsightLibTester.java) to explain how to use Insight within your application.
