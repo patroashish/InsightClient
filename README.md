@@ -1,13 +1,15 @@
 InsightClient
 =============
 
+Setup your own mobile application analytics framework!
+
 Insight is a measurement toolkit that allows mobile application developers to collect application analytics and understand  various aspects about the usage of their applications. Insight allows application developers to collect a diverse set of statistics from their application: device type information, client sessions, client location, CPU + memory consumption statistics, battery drain statistics, application specific events.
 
 Furthermore, Insight performs light-weight network latency measurements during the application sessions. This is useful for correlating the network performance with the aforementioned data. For example, by tracking in-app purchases made by users and the network quality statistics of sessions in which these purchases were made, developers can infer how user revenue may be impacted by quality across different networks. 
 
 A version of this toolkit was used for the measurements in our CoNEXT 2013 paper: Capturing mobile experience in the wild: a tale of two apps: http://dl.acm.org/citation.cfm?id=2535391
 
-This repository contains the source code for the client-side Insight implementation. Before using the Insight client, developers need to setup the Insight servers to collect and store data from the Insight clients. The server code and setup instructions are available at the following location: https://github.com/patroashish/InsightServers
+This repository contains the source code for the client-side Insight implementation. Before using the Insight client, you need to setup the Insight servers to collect and store data from the Insight clients. The server code and setup instructions are available at the following location: https://github.com/patroashish/InsightServers
 
 To use Insight with your application, include the Insight client code as a library (jar file) or copy the source code directly into the application. To package Insight client code as a jar file, export the "com/wisc/insightlib/" directory in the src/ folder. Then, add the following lines of code to the main activity in your Android application:
 
