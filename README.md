@@ -31,9 +31,9 @@ To use Insight with your application, include the Insight client code as a libra
 
 3. In the onDestroy() method, add the 'InsightLib.finish()' call at beginning of the function (before super.onDestroy()). Insight immediately ends the current session before the main activity is destroyed.
 		
-		InsightLib.finish();
+		InsightLib.finish(); // Insight API call.
 
-		super.onDestroy(); // Insight API call.
+		super.onDestroy();
 		
 		// Other application code.
 
@@ -43,16 +43,16 @@ The following Insight API calls can be used to log application specific events i
 1. Logs an event denoted by the eventID. It increments the counter for the input event (starting at 0).
 		
 		InsightLib.captureEvent(Integer eventID);
-	
+
 2. Logs an event corresponding to the eventID and the value corresponding to the event instance.
      
 		InsightLib.captureEventValue(Integer eventID, Double value);
-	
+
 3. Logs an event corresponding to the eventID and the value string corresponding to the event instance.
 		
 		InsightLib.captureEventString(Integer eventID, String value);
-  	 
-4.. The following pair of calls should be wrapped around a download event (e.g., downloading an image file,   transmitting data to a server etc.). These call record the duration and the bytes transferred during the download event.
+
+4. The following pair of calls should be wrapped around a download event (e.g., downloading an image file,   transmitting data to a server etc.). These call record the duration and the bytes transferred during the download event.
   
 		// Call the method before the start of the download.
 		long downloadId = InsightLib.downloadStarted();
